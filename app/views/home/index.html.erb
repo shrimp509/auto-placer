@@ -1,0 +1,22 @@
+
+<h1>神棍的專屬網頁</h1>
+
+<%= form_with url: 'start', method: :get do |f| %>
+    <%= f.label '地址' %>
+    <%= f.text_field :address %>
+    <%= f.label '日期' %>
+    <%= f.text_field :date %>
+    <%= f.label '屋主' %>
+    <%= f.text_field :owner %>
+    <%= f.label '姓名' %>
+    <%= f.text_field :name %>
+    <%= f.label '身分證' %>
+    <%= f.text_field :idcard %>
+    <%= f.label '電話' %>
+    <%= f.text_field :phone %>
+    <%= f.label '水號' %>
+    <%= f.text_field :waternum %>
+    <%= f.label '水表度數' %>
+    <%= f.text_field :watervol %>
+    <%= f.submit '產生圖表' %>
+<% end %>
