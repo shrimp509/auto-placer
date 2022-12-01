@@ -6,9 +6,9 @@ class HomeController < ApplicationController
 
   def start
     date = params[:date]&.match(DATE_REGX)
-    water_charge = "#{Rails.root}/tmp/#{params[:name]}-water-charge.png"
-    water_affidavit = "#{Rails.root}/tmp/#{params[:name]}-water-affidavit-letter.png"
-    electric = "#{Rails.root}/tmp/#{params[:name]}-electric.png"
+    water_charge = "#{Rails.root}/tmp/#{params[:owner]}-台水中間結帳收費單.png"
+    water_affidavit = "#{Rails.root}/tmp/#{params[:owner]}-台水中間結帳切結書.png"
+    electric = "#{Rails.root}/tmp/#{params[:owner]}-台電變更用電單.png"
 
     `ffmpeg -y \
       -i #{Rails.root}/app/assets/images/water-charge.png \
@@ -36,25 +36,31 @@ class HomeController < ApplicationController
             #{draw_text(params[:phone], 290, 880, size: 30)}" #{electric}`
 
     require 'zip'
-    Zip::File.open("tmp/#{params[:name]}.zip", Zip::File::CREATE) do |zip|
+    zip_name = "#{params[:owner]}-#{Time.now.strftime('%Y%m%d%H%M')}.zip"
+    Zip::File.open("tmp/#{zip_name}", Zip::File::CREATE) do |zip|
       zip.add(File.basename(water_charge), water_charge)
       zip.add(File.basename(water_affidavit), water_affidavit)
       zip.add(File.basename(electric), electric)
     end
 
-    @name = params[:name]
+    @name = zip_name
+  ensure
+    [water_charge, water_affidavit, electric].each { |file| File.delete(file) }
   end
 
   def download
     name = CGI.unescape(params[:name])
-    send_file("tmp/#{name}.zip")
+    file = "tmp/#{name}"
+    send_file(file) if File.exist?(file)
+  ensure
+    other_zips = Dir.glob("tmp/*.zip") - [file]
+    other_zips.each { |file| File.delete(file) }
   end
 
   private
 
   def font_file
-    # "fontfile=#{Rails.root}/app/assets/fonts/NotoSansMonoCJKtc-Regular.otf"
-    "fontfile=#{Rails.root}/app/assets/fonts/Cubic_11.ttf"
+    "fontfile=#{Rails.root}/app/assets/fonts/TaipeiSansTCBeta-Regular.ttf"
   end
 
   def draw_text(text, x, y, color: 'black', size: 22)
