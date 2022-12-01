@@ -9,30 +9,31 @@ class HomeController < ApplicationController
     water_charge = "#{Rails.root}/tmp/#{params[:name]}-water-charge.png"
     water_affidavit = "#{Rails.root}/tmp/#{params[:name]}-water-affidavit-letter.png"
     electric = "#{Rails.root}/tmp/#{params[:name]}-electric.png"
+
     `ffmpeg -y \
       -i #{Rails.root}/app/assets/images/water-charge.png \
-      -vf "drawtext=text='#{params[:name]}':fontcolor=black:fontsize=22:x=107:y=139,\
-        drawtext=text='#{params[:watervol]}':fontcolor=black:fontsize=22:x=192:y=252,\
-        drawtext=text='#{date[:year]}':fontcolor=black:fontsize=22:x=626:y=185,\
-        drawtext=text='#{date[:month]}':fontcolor=black:fontsize=22:x=685:y=185,\
-        drawtext=text='#{date[:date]}':fontcolor=black:fontsize=22:x=740:y=185" #{water_charge}`
+      -vf "#{draw_text(params[:name], 107, 139)},\
+        #{draw_text(params[:watervol], 192, 252)},\
+        #{draw_text(date[:year], 626, 185)},\
+        #{draw_text(date[:month], 685, 185)},\
+        #{draw_text(date[:date], 740, 185)}" #{water_charge}`
 
     `ffmpeg -y \
       -i #{Rails.root}/app/assets/images/water-affidavit-letter.jpg \
-      -vf "drawtext=text='#{params[:owner]}':fontcolor=black:fontsize=30:x=280:y=230,\
-          drawtext=text='#{params[:waternum]}':fontcolor=black:fontsize=30:x=630:y=250,\
-          drawtext=text='#{params[:name]}':fontcolor=black:fontsize=30:x=980:y=220,\
-          drawtext=text='#{params[:phone]}':fontcolor=black:fontsize=30:x=1220:y=220,\
-          drawtext=text='#{params[:date]}':fontcolor=black:fontsize=30:x=1450:y=220,\
-          drawtext=text='#{params[:watervol]}':fontcolor=black:fontsize=30:x=60:y=460,\
-          drawtext=text='#{params[:address]}':fontcolor=black:fontsize=30:x=620:y=400" #{water_affidavit}`
+      -vf "#{draw_text(params[:owner], 280, 230, size: 30)},\
+          #{draw_text(params[:waternum], 630, 250, size: 30)},\
+          #{draw_text(params[:name], 980, 220, size: 30)},\
+          #{draw_text(params[:phone], 1220, 220, size: 30)},\
+          #{draw_text(params[:date], 1450, 220, size: 30)},\
+          #{draw_text(params[:watervol], 60, 460, size: 30)},\
+          #{draw_text(params[:address], 620, 400, size: 30)}" #{water_affidavit}`
 
     `ffmpeg -y \
       -i #{Rails.root}/app/assets/images/electric.png \
-      -vf "drawtext=text='#{params[:address]}':fontcolor=black:fontsize=30:x=200:y=228,\
-            drawtext=text='#{params[:name]}':fontcolor=black:fontsize=30:x=300:y=800,\
-            drawtext=text='#{params[:idcard]}':fontcolor=black:fontsize=30:x=390:y=840,\
-            drawtext=text='#{params[:phone]}':fontcolor=black:fontsize=30:x=290:y=880" #{electric}`
+      -vf "#{draw_text(params[:address], 200, 228, size: 30)},\
+            #{draw_text(params[:name], 300, 800, size: 30)},\
+            #{draw_text(params[:idcard], 390, 840, size: 30)},\
+            #{draw_text(params[:phone], 290, 880, size: 30)}" #{electric}`
 
     require 'zip'
     Zip::File.open("tmp/#{params[:name]}.zip", Zip::File::CREATE) do |zip|
@@ -47,5 +48,16 @@ class HomeController < ApplicationController
   def download
     name = CGI.unescape(params[:name])
     send_file("tmp/#{name}.zip")
+  end
+
+  private
+
+  def font_file
+    # "fontfile=#{Rails.root}/app/assets/fonts/NotoSansMonoCJKtc-Regular.otf"
+    "fontfile=#{Rails.root}/app/assets/fonts/Cubic_11.ttf"
+  end
+
+  def draw_text(text, x, y, color: 'black', size: 22)
+    "drawtext=#{font_file}:text='#{text}':fontcolor=#{color}:fontsize=#{size}:x=#{x}:y=#{y}"
   end
 end
