@@ -1,22 +1,42 @@
 
-<h1>冠甫的小幫手</h1>
+<div class="container">
+    <h1>冠甫的小幫手</h1>
+    <p>這網站將協助冠甫完成無聊的台水台電填資料雜事</p>
+    <br>
 
-<%= form_with url: 'start', method: :get do |f| %>
-    <%= f.label '地址' %>
-    <%= f.text_field :address %>
-    <%= f.label '日期' %>
-    <%= f.text_field :date %>
-    <%= f.label '屋主' %>
-    <%= f.text_field :owner %>
-    <%= f.label '姓名' %>
-    <%= f.text_field :name %>
-    <%= f.label '身分證' %>
-    <%= f.text_field :idcard %>
-    <%= f.label '電話' %>
-    <%= f.text_field :phone %>
-    <%= f.label '水號' %>
-    <%= f.text_field :waternum %>
-    <%= f.label '水表度數' %>
-    <%= f.text_field :watervol %>
-    <%= f.submit '產生圖表' %>
-<% end %>
+    <%= form_with url: 'start', method: :get, class: 'my-form' do |f| %>
+        <div class="my-field">
+            <%= f.label '地址' %>
+            <%= f.text_field :address %>
+        </div>
+        <div class="my-field">
+            <%= f.label '日期' %>
+            <%= f.text_field :date %>
+        </div>
+        <div class="my-field">
+            <%= f.label '屋主' %>
+            <%= f.text_field :owner %>
+        </div>
+        <div class="my-field">
+            <%= f.label '姓名' %>
+            <%= f.text_field :name %>
+        </div>
+        <div class="my-field">
+            <%= f.label '身分證' %>
+            <%= f.text_field :idcard %>
+        </div>
+        <div class="my-field">
+            <%= f.label '電話' %>
+            <%= f.text_field :phone %>
+        </div>
+        <div class="my-field">
+            <%= f.label '水號' %>
+            <%= f.text_field :waternum %>
+        </div>
+        <div class="my-field">
+            <%= f.label '水表度數' %>
+            <%= f.text_field :watervol %>
+        </div>
+        <%= f.submit '產生圖表', class: 'submit' %>
+    <% end %>
+</div>

@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "TaipeiSansTCBeta";
+}
+
+@font-face {
+    font-family: 'TaipeiSansTCBeta';
+    src: url('TaipeiSansTCBeta-Regular.ttf') format('truetype');
+  }
+  
