@@ -15,6 +15,7 @@ label {
 
 input {
     border: 1px solid #ced4da;
+    padding: .375rem .75rem;
 }
 
 .container {
@@ -46,4 +47,8 @@ input {
 
 .submit:hover {
     background: #0b5ed7;
+}
+
+.watervol {
+    width: 100%;
 }
