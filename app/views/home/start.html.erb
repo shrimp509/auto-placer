@@ -1,10 +1,9 @@
 
 <div class="container">
     <h1><u><%= params[:owner] %></u>的圖表產生完成</h1>
-    <p>共產生三張圖，並且壓縮為一個檔案：</p>
+    <p>共產生兩張圖，並且壓縮為一個檔案：</p>
     <ol class="my-list">
         <li>台水 的 中間結帳切結書</li>
-        <li>台水 的 中間結帳收費單</li>
         <li>台電 的 變更用電單</li>
     </ol>
     <%= link_to '下載壓縮檔', download_path(name: @name), class: 'link-btn' %>

@@ -1,26 +1,15 @@
 class HomeController < ApplicationController
-  DATE_REGX = /(?<year>\d+)\/(?<month>\d+)\/(?<date>\d+)/
-
   def index
   end
 
   def start
-    date = params[:date]&.match(DATE_REGX)
-    water_charge = "#{Rails.root}/tmp/#{params[:owner]}-台水中間結帳收費單.png"
     water_affidavit = "#{Rails.root}/tmp/#{params[:owner]}-台水中間結帳切結書.png"
     electric = "#{Rails.root}/tmp/#{params[:owner]}-台電變更用電單.png"
 
     `ffmpeg -y \
-      -i #{Rails.root}/app/assets/images/water-charge.png \
-      -vf "#{draw_text(params[:name], 107, 139)},\
-        #{draw_text(params[:watervol], 192, 252)},\
-        #{draw_text(date[:year], 626, 185)},\
-        #{draw_text(date[:month], 685, 185)},\
-        #{draw_text(date[:date], 740, 185)}" #{water_charge}`
-
-    `ffmpeg -y \
       -i #{Rails.root}/app/assets/images/water-affidavit-letter.jpg \
-      -vf "#{draw_text(params[:owner], 280, 230, size: 30)},\
+      -vf "#{draw_text(params[:date], 55, 230, size: 30)},\
+          #{draw_text(params[:owner], 280, 230, size: 30)},\
           #{draw_text(params[:waternum], 630, 250, size: 30)},\
           #{draw_text(params[:name], 980, 220, size: 30)},\
           #{draw_text(params[:phone], 1220, 220, size: 30)},\
@@ -36,16 +25,15 @@ class HomeController < ApplicationController
             #{draw_text(params[:phone], 290, 880, size: 30)}" #{electric}`
 
     require 'zip'
-    zip_name = "#{params[:owner]}-#{Time.now.strftime('%Y%m%d%H%M')}.zip"
+    zip_name = "#{params[:address]}.zip"
     Zip::File.open("tmp/#{zip_name}", Zip::File::CREATE) do |zip|
-      zip.add(File.basename(water_charge), water_charge)
       zip.add(File.basename(water_affidavit), water_affidavit)
       zip.add(File.basename(electric), electric)
     end
 
     @name = zip_name
   ensure
-    [water_charge, water_affidavit, electric].each { |file| File.delete(file) }
+    [water_affidavit, electric].each { |file| File.delete(file) }
   end
 
   def download
