@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AutoPlacer</title>
+    <title>By 寫程式的山姆老弟</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= favicon_link_tag asset_path('logo.ico') %>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -12,5 +14,9 @@
 
   <body>
     <%= yield %>
+    <div class="container" style="color: #A3A3A3; font-size: 13px;">
+      <hr style="margin: 20px 0;">
+      Made By <%= link_to "寫程式的山姆老弟", "https://www.youtube.com/channel/UCkUpBgXi3L-DZ1hS1Inc0Wg", style: "color: #A3A3A3;" %> at 2022/12/01
+    </div>
   </body>
 </html>
