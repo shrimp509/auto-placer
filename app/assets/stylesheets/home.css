@@ -1,4 +1,3 @@
-
 h1 {
     margin: 30px;
 }
@@ -51,4 +50,19 @@ input {
 
 .watervol {
     width: 100%;
+}
+
+.goto-lease {
+    display: block;
+    color: rgb(185, 184, 184);
+    margin: 8px 0;
+    padding: 4px;
+    border: none;
+    border-radius: 0.5rem;
+    text-align: right;
+    text-decoration: none;
+}
+
+.goto-lease:hover {
+    color: rgb(135, 135, 135);
 }
