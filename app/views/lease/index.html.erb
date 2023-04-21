@@ -7,24 +7,79 @@
 
     <%= form_with url: 'start', method: :get, class: 'my-form' do |f| %>
         <div class="my-field">
-            <%= f.label '地址' %>
-            <%= f.text_field :address %>
-        </div>
-        <div class="my-field">
-            <%= f.label '日期' %>
+            <%= f.label '審閱時間-年' %>
+            <%= f.text_field :year %>
+            <%= f.label '審閱時間-月' %>
+            <%= f.text_field :month %>
+            <%= f.label '審閱時間-日' %>
             <%= f.text_field :date %>
         </div>
         <div class="my-field">
-            <%= f.label '屋主' %>
-            <%= f.text_field :owner %>
+            <%= f.label '建號' %>
+            <%= f.text_field :building_number %>
+            <%= f.label '門牌' %>
+            <%= f.text_field :house_number %>
+            <%= f.label '汽車位' %>
+            <%= f.text_field :car_capacity %>
+            <%= f.label '機車位' %>
+            <%= f.text_field :bike_capacity %>
+            <%= f.label '主建物' %>
+            <%= f.text_field :main_building %>
+            <%= f.label '附屬建物' %>
+            <%= f.text_field :affiliated_building %>
+            <%= f.label '共有部分建號' %>
+            <%= f.text_field :shared_building_number %>
         </div>
         <div class="my-field">
-            <%= f.label '姓名' %>
-            <%= f.text_field :name %>
+            <%= f.label '汽車車位-層' %>
+            <%= f.text_field :parking_car_floor %>
+            <%= f.radio_button :option_parking_type, 'option_parking_flat', id: 'option_parking_flat' %>
+            <%= f.label 'option_flat', '平面車位' %>
+            <%= f.radio_button :option_parking_type, 'option_parking_machine', id: 'option_parking_machine' %>
+            <%= f.label 'option_machine', '機械車位' %>
+            <%= f.label '汽車車位編號' %>
+            <%= f.text_field :parking_car_number %>
+
+            <%= f.label '機車車位-層' %>
+            <%= f.text_field :parking_bike_floor %>
+            <%= f.label '機車車位編號' %>
+            <%= f.text_field :parking_bike_number %>
+
+            <%= f.radio_button :option_parking_period, 'a', id: 'option_parking_use_period_full' %>
+            <%= f.label 'option_flat', '全日' %>
+            <%= f.radio_button :option_parking_period, 'b', id: 'option_parking_use_period_day' %>
+            <%= f.label 'option_machine', '日間' %>
+            <%= f.radio_button :option_parking_period, 'c', id: 'option_parking_use_period_night' %>
+            <%= f.label 'option_machine', '夜間' %>
+            <%= f.radio_button :option_parking_period, 'd', id: 'option_parking_use_period_other' %>
+            <%= f.label 'option_machine', '其他' %>
+            <%= f.text_field :other %>
         </div>
         <div class="my-field">
-            <%= f.label '身分證' %>
-            <%= f.text_field :idcard %>
+            <%= f.label '起始租貸期間-年' %>
+            <%= f.text_field :lease_period_from_year %>
+            <%= f.label '起始租貸期間-月' %>
+            <%= f.text_field :lease_period_from_month %>
+            <%= f.label '起始租貸期間-日' %>
+            <%= f.text_field :lease_period_from_day %>
+
+            <%= f.label '截止租貸期間-年' %>
+            <%= f.text_field :lease_period_to_year %>
+            <%= f.label '截止租貸期間-月' %>
+            <%= f.text_field :lease_period_to_month %>
+            <%= f.label '截止租貸期間-日' %>
+            <%= f.text_field :lease_period_to_day %>
+        </div>
+        <div class="my-field">
+            <%= f.label '租金' %>
+            <%= f.text_field :lease_price %>
+
+            <%= f.radio_button :option_lease_unit, 'c', id: 'option_lease_unit_month' %>
+            <%= f.label 'option_machine', '每月' %>
+            <%= f.text_field :option_lease_unit_month_day %>
+            <%= f.radio_button :option_lease_unit, 'd', id: 'option_lease_unit_period' %>
+            <%= f.label 'option_machine', '每期' %>
+            <%= f.text_field :option_lease_unit_period_content %>
         </div>
         <div class="my-field">
             <%= f.label '電話' %>
