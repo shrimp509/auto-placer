@@ -13,10 +13,8 @@
   </head>
 
   <body>
+    <%= render('layouts/navbar') %>
     <%= yield %>
-    <div class="container" style="color: #A3A3A3; font-size: 13px;">
-      <hr style="margin: 20px 0;">
-      Made By <%= link_to "寫程式的山姆老弟", "https://www.youtube.com/channel/UCkUpBgXi3L-DZ1hS1Inc0Wg", style: "color: #A3A3A3;" %> at 2022/12/01
-    </div>
+    <%= render('layouts/footer') %>
   </body>
 </html>
