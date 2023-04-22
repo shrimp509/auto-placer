@@ -1,98 +1,202 @@
-
-<div class="container">
-    <h1>冠甫的租約小幫手</h1>
-    <p>這網站將協助冠甫，完成租約需要填資料的雜事</p>
-    <p>只需要填一次資料，就產出所需圖片</p>
-    <br>
-
-    <%= form_with url: 'start', method: :get, class: 'my-form' do |f| %>
-        <div class="my-field">
-            <%= f.label '審閱時間-年' %>
-            <%= f.text_field :year %>
-            <%= f.label '審閱時間-月' %>
-            <%= f.text_field :month %>
-            <%= f.label '審閱時間-日' %>
-            <%= f.text_field :date %>
-        </div>
-        <div class="my-field">
-            <%= f.label '建號' %>
-            <%= f.text_field :building_number %>
-            <%= f.label '門牌' %>
-            <%= f.text_field :house_number %>
-            <%= f.label '汽車位' %>
-            <%= f.text_field :car_capacity %>
-            <%= f.label '機車位' %>
-            <%= f.text_field :bike_capacity %>
-            <%= f.label '主建物' %>
-            <%= f.text_field :main_building %>
-            <%= f.label '附屬建物' %>
-            <%= f.text_field :affiliated_building %>
-            <%= f.label '共有部分建號' %>
-            <%= f.text_field :shared_building_number %>
-        </div>
-        <div class="my-field">
-            <%= f.label '汽車車位-層' %>
-            <%= f.text_field :parking_car_floor %>
-            <%= f.radio_button :option_parking_type, 'option_parking_flat', id: 'option_parking_flat' %>
-            <%= f.label 'option_flat', '平面車位' %>
-            <%= f.radio_button :option_parking_type, 'option_parking_machine', id: 'option_parking_machine' %>
-            <%= f.label 'option_machine', '機械車位' %>
-            <%= f.label '汽車車位編號' %>
-            <%= f.text_field :parking_car_number %>
-
-            <%= f.label '機車車位-層' %>
-            <%= f.text_field :parking_bike_floor %>
-            <%= f.label '機車車位編號' %>
-            <%= f.text_field :parking_bike_number %>
-
-            <%= f.radio_button :option_parking_period, 'a', id: 'option_parking_use_period_full' %>
-            <%= f.label 'option_flat', '全日' %>
-            <%= f.radio_button :option_parking_period, 'b', id: 'option_parking_use_period_day' %>
-            <%= f.label 'option_machine', '日間' %>
-            <%= f.radio_button :option_parking_period, 'c', id: 'option_parking_use_period_night' %>
-            <%= f.label 'option_machine', '夜間' %>
-            <%= f.radio_button :option_parking_period, 'd', id: 'option_parking_use_period_other' %>
-            <%= f.label 'option_machine', '其他' %>
-            <%= f.text_field :other %>
-        </div>
-        <div class="my-field">
-            <%= f.label '起始租貸期間-年' %>
-            <%= f.text_field :lease_period_from_year %>
-            <%= f.label '起始租貸期間-月' %>
-            <%= f.text_field :lease_period_from_month %>
-            <%= f.label '起始租貸期間-日' %>
-            <%= f.text_field :lease_period_from_day %>
-
-            <%= f.label '截止租貸期間-年' %>
-            <%= f.text_field :lease_period_to_year %>
-            <%= f.label '截止租貸期間-月' %>
-            <%= f.text_field :lease_period_to_month %>
-            <%= f.label '截止租貸期間-日' %>
-            <%= f.text_field :lease_period_to_day %>
-        </div>
-        <div class="my-field">
-            <%= f.label '租金' %>
-            <%= f.text_field :lease_price %>
-
-            <%= f.radio_button :option_lease_unit, 'c', id: 'option_lease_unit_month' %>
-            <%= f.label 'option_machine', '每月' %>
-            <%= f.text_field :option_lease_unit_month_day %>
-            <%= f.radio_button :option_lease_unit, 'd', id: 'option_lease_unit_period' %>
-            <%= f.label 'option_machine', '每期' %>
-            <%= f.text_field :option_lease_unit_period_content %>
-        </div>
-        <div class="my-field">
-            <%= f.label '電話' %>
-            <%= f.text_field :phone %>
-        </div>
-        <div class="my-field">
-            <%= f.label '水號' %>
-            <%= f.text_field :waternum %>
-        </div>
-        <div class="my-field">
-            <%= f.label '水表度數', class: 'watervol' %>
-            <%= f.text_field :watervol %>
-        </div>
-        <%= f.submit '產生圖表', class: 'submit' %>
-    <% end %>
+<div>
+    <h1 class="text-center mb-4">租約小幫手</h1>
+    <p class="lead text-center">將協助冠甫，完成租約需要填資料的雜事<br>只需要填一次資料，就產出所需圖片</p>
 </div>
+
+<%= form_with url: 'start', method: :get, class: 'row g-3' do |f| %>
+    <div class="row g-3">
+        <div class="row g-3">
+            <%= f.label '審閱時間', class: 'form-label fw-bold fs-4' %>
+
+            <div class="col-md-4">
+                <%= f.label '年' %>
+                <%= f.text_field :year, class: "form-control" %>
+            </div>
+            <div class="col-md-4">
+                <%= f.label '月' %>
+                <%= f.text_field :month, class: "form-control" %>
+            </div>
+            <div class="col-md-4">
+                <%= f.label '日' %>
+                <%= f.text_field :date, class: "form-control" %>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <%= f.label '租賃住宅標示', class: 'form-label fw-bold fs-4' %>
+
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <%= f.label '建號' %>
+                    <%= f.text_field :building_number, class: "form-control" %>
+                </div>
+                <div class="col-md-4">
+                    <%= f.label '門牌' %>
+                    <%= f.text_field :house_number, class: "form-control" %>
+                </div>
+                <div class="col-md-4">
+                    <%= f.label '汽車位' %>
+                    <%= f.text_field :car_capacity, class: "form-control" %>
+                </div>
+                <div class="col-md-4">
+                    <%= f.label '機車位' %>
+                    <%= f.text_field :bike_capacity, class: "form-control" %>
+                </div>
+                <div class="col-md-4">
+                    <%= f.label '主建物' %>
+                    <%= f.text_field :main_building, class: "form-control" %>
+                </div>
+                <div class="col-md-4">
+                    <%= f.label '附屬建物' %>
+                    <%= f.text_field :affiliated_building, class: "form-control" %>
+                </div>
+                <div class="col-md-4">
+                    <%= f.label '共有部分建號' %>
+                    <%= f.text_field :shared_building_number, class: "form-control" %>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <%= f.label '租賃範圍', class: 'form-label fw-bold fs-4' %>
+
+            <div class="row g-3 mb-4">
+                <%= f.label '汽車車位', class: 'form-label fw-bold fs-5' %>
+
+                <div class="col-md-4">
+                    <%= f.label '第幾層' %>
+                    <%= f.text_field :parking_car_floor, class: "form-control" %>
+                </div>
+
+                <div class="col-md-4">
+                    <%= f.label '車位編號' %>
+                    <%= f.text_field :parking_car_number, class: "form-control" %>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-check">
+                        <%= f.radio_button :option_parking_type, 'option_parking_flat', id: 'option_parking_flat', class: 'form-check-input' %>
+                        <%= f.label 'option_flat', '平面車位', class: 'form-check-label' %>
+                    </div>
+                    <div class="form-check">
+                        <%= f.radio_button :option_parking_type, 'option_parking_machine', id: 'option_parking_machine', class: 'form-check-input' %>
+                        <%= f.label 'option_machine', '機械車位', class: 'form-check-label' %>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-3 mb-4">
+                <%= f.label '機車車位', class: 'form-label fw-bold fs-5' %>
+
+                <div class="col-md-4">
+                    <%= f.label '第幾層' %>
+                    <%= f.text_field :parking_bike_floor, class: "form-control" %>
+                </div>
+
+                <div class="col-md-4">
+                    <%= f.label '車位編號' %>
+                    <%= f.text_field :parking_bike_number, class: "form-control" %>
+                </div>
+            </div>
+
+            <div class="row g-3 mb-4">
+                <%= f.label '使用時間', class: 'form-label fw-bold fs-5' %>
+
+                <div class="col-md-4">
+
+                    <div class="form-check">
+                        <%= f.radio_button :option_parking_period, 'a', id: 'option_parking_use_period_full', class: 'form-check-input' %>
+                        <%= f.label 'option_flat', '全日', class: 'form-check-label' %>
+                    </div>
+
+                    <div class="form-check">
+                        <%= f.radio_button :option_parking_period, 'b', id: 'option_parking_use_period_day', class: 'form-check-input' %>
+                        <%= f.label 'option_machine', '日間', class: 'form-check-label' %>
+                    </div>
+
+                    <div class="form-check">
+                        <%= f.radio_button :option_parking_period, 'c', id: 'option_parking_use_period_night', class: 'form-check-input' %>
+                        <%= f.label 'option_machine', '夜間', class: 'form-check-label' %>
+                    </div>
+
+                    <div class="form-check">
+                        <%= f.radio_button :option_parking_period, 'd', id: 'option_parking_use_period_other', class: 'form-check-input' %>
+                        <%= f.label 'option_machine', '其他', class: 'form-check-label' %>
+                        <%= f.text_field :other, class: "form-control" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <%= f.label '租賃期間', class: 'form-label fw-bold fs-4' %>
+
+            <div class="row g-3 mb-4">
+                <%= f.label '起始時間', class: 'form-label fw-bold fs-5' %>
+                <div class="col-md-4">
+                    <%= f.label '年' %>
+                    <%= f.text_field :lease_period_from_year, class: "form-control" %>
+                </div>
+                <div class="col-md-4">
+                    <%= f.label '月' %>
+                    <%= f.text_field :lease_period_from_month, class: "form-control" %>
+                </div>
+                <div class="col-md-4">
+                    <%= f.label '日' %>
+                    <%= f.text_field :lease_period_from_day, class: "form-control" %>
+                </div>
+            </div>
+
+            <div class="row g-3 mb-4">
+                <%= f.label '截止時間', class: 'form-label fw-bold fs-5' %>
+
+                <div class="col-md-4">
+                    <%= f.label '年' %>
+                    <%= f.text_field :lease_period_to_year, class: "form-control" %>
+                </div>
+                <div class="col-md-4">
+                    <%= f.label '月' %>
+                    <%= f.text_field :lease_period_to_month, class: "form-control" %>
+                </div>
+                <div class="col-md-4">
+                    <%= f.label '日' %>
+                    <%= f.text_field :lease_period_to_day, class: "form-control" %>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <%= f.label '租金資訊', class: 'form-label fw-bold fs-4' %>
+
+            <div class="col-md-4">
+                <%= f.label '租金' %>
+                <%= f.text_field :lease_price, class: "form-control" %>
+            </div>
+            <div class="col-md-4">
+                <div class="form-check">
+                    <%= f.radio_button :option_lease_unit, 'c', id: 'option_lease_unit_month', class: 'form-check-input', checked: true %>
+                    <%= f.label 'option_machine', '每月', class: 'form-check-label' %>
+                    <%= f.text_field :option_lease_unit_month_day %>
+                    <%= f.label 'option_machine', '日' %>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+        </div>
+
+        <div class="col-12">
+        </div>
+
+        <div class="col-12">
+        </div>
+
+        <div class="col-12">
+        </div>
+
+        <div class="col-12">
+        </div>
+
+        <%= f.submit '產生圖表', class: 'btn btn-primary mb-5' %>
+    </div>
+<% end %>

@@ -1,36 +1,35 @@
-<div class="container-sm">
-    <div>
-        <h1 class="text-center mb-4">水電小幫手</h1>
-        <p class="lead text-center">將協助冠甫，完成台水、台電需要填資料的雜事<br>只需要填一次資料，就產出所需圖片</p>
-    </div>
 
-    <%= form_with url: 'start', method: :get, class: 'row g-3' do |f| %>
-        <div class="row g-3">
-            <%= f.label '地址', class: 'form-label' %>
-            <%= f.text_field :address, class: 'form-control' %>
-
-            <%= f.label '日期' %>
-            <%= f.text_field :date, class: 'form-control' %>
-
-            <%= f.label '屋主' %>
-            <%= f.text_field :owner, class: 'form-control' %>
-
-            <%= f.label '姓名' %>
-            <%= f.text_field :name, class: 'form-control' %>
-
-            <%= f.label '身分證' %>
-            <%= f.text_field :idcard, class: 'form-control' %>
-
-            <%= f.label '電話' %>
-            <%= f.text_field :phone, class: 'form-control' %>
-        
-            <%= f.label '水號' %>
-            <%= f.text_field :waternum, class: 'form-control' %>
-        
-            <%= f.label '水表度數', class: 'watervol' %>
-            <%= f.text_field :watervol, class: 'form-control' %>
-
-            <%= f.submit '產生圖表', class: 'btn btn-primary mb-5' %>
-        </div>
-    <% end %>
+<div>
+    <h1 class="text-center mb-4">水電小幫手</h1>
+    <p class="lead text-center">將協助冠甫，完成台水、台電需要填資料的雜事<br>只需要填一次資料，就產出所需圖片</p>
 </div>
+
+<%= form_with url: 'start', method: :get, class: 'row g-3' do |f| %>
+    <div class="row g-3">
+        <%= f.label '地址', class: 'form-label' %>
+        <%= f.text_field :address, class: 'form-control' %>
+
+        <%= f.label '日期' %>
+        <%= f.text_field :date, class: 'form-control' %>
+
+        <%= f.label '屋主' %>
+        <%= f.text_field :owner, class: 'form-control' %>
+
+        <%= f.label '姓名' %>
+        <%= f.text_field :name, class: 'form-control' %>
+
+        <%= f.label '身分證' %>
+        <%= f.text_field :idcard, class: 'form-control' %>
+
+        <%= f.label '電話' %>
+        <%= f.text_field :phone, class: 'form-control' %>
+
+        <%= f.label '水號' %>
+        <%= f.text_field :waternum, class: 'form-control' %>
+
+        <%= f.label '水表度數', class: 'watervol' %>
+        <%= f.text_field :watervol, class: 'form-control' %>
+
+        <%= f.submit '產生圖表', class: 'btn btn-primary mb-5' %>
+    </div>
+<% end %>

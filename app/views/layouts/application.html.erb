@@ -14,7 +14,9 @@
 
   <body>
     <%= render('layouts/navbar') %>
-    <%= yield %>
+    <div class="container-sm">
+      <%= yield %>
+    </div>
     <%= render('layouts/footer') %>
   </body>
 </html>
