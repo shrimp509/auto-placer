@@ -111,17 +111,17 @@
 
                     <div class="form-check">
                         <%= f.radio_button :option_parking_period, 'b', id: 'option_parking_use_period_day', class: 'form-check-input' %>
-                        <%= f.label 'option_machine', '日間', class: 'form-check-label' %>
+                        <%= f.label 'option_day', '日間', class: 'form-check-label' %>
                     </div>
 
                     <div class="form-check">
                         <%= f.radio_button :option_parking_period, 'c', id: 'option_parking_use_period_night', class: 'form-check-input' %>
-                        <%= f.label 'option_machine', '夜間', class: 'form-check-label' %>
+                        <%= f.label 'option_night', '夜間', class: 'form-check-label' %>
                     </div>
 
                     <div class="form-check">
                         <%= f.radio_button :option_parking_period, 'd', id: 'option_parking_use_period_other', class: 'form-check-input' %>
-                        <%= f.label 'option_machine', '其他', class: 'form-check-label' %>
+                        <%= f.label 'option_others', '其他', class: 'form-check-label' %>
                         <%= f.text_field :other, class: "form-control" %>
                     </div>
                 </div>
@@ -169,32 +169,93 @@
             <%= f.label '租金資訊', class: 'form-label fw-bold fs-4' %>
 
             <div class="col-md-4">
-                <%= f.label '租金' %>
-                <%= f.text_field :lease_price, class: "form-control" %>
+                <%= f.label '繳納租金' %>
+                <div class="input-group mb-3">
+                    <%= f.text_field :lease_price, class: "form-control" %>
+                    <span class="input-group-text" id="basic-addon2">元</span>
+                </div>
             </div>
             <div class="col-md-4">
                 <div class="form-check">
                     <%= f.radio_button :option_lease_unit, 'c', id: 'option_lease_unit_month', class: 'form-check-input', checked: true %>
-                    <%= f.label 'option_machine', '每月', class: 'form-check-label' %>
-                    <%= f.text_field :option_lease_unit_month_day %>
-                    <%= f.label 'option_machine', '日' %>
+                    <%= f.label 'option_per_month', '於每月', class: 'form-check-label' %>
+
+                    <div class="input-group mb-3">
+                        <%= f.text_field :option_lease_unit_month_day, class: "form-control" %>
+                        <span class="input-group-text" id="basic-addon2">日前支付</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-check">
+                    <%= f.radio_button :option_pay_method, 'c', id: 'option_pay_method', class: 'form-check-input', checked: true %>
+                    <%= f.label 'option_transfer', '轉帳繳納', class: 'form-check-label' %>
+
+                    <br>
+                    <%= f.label 'option_bank_name', '金融機構' %>
+                    <%= f.text_field :bank_name, class: "form-control" %>
+
+                    <%= f.label 'option_bank_user_name', '戶名' %>
+                    <%= f.text_field :bank_user_name, class: "form-control" %>
+
+                    <%= f.label 'option_bank_user_account', '帳號' %>
+                    <%= f.text_field :bank_user_account, class: "form-control" %>
                 </div>
             </div>
         </div>
 
         <div class="col-12">
-        </div>
+            <%= f.label '立契約書人', class: 'form-label fw-bold fs-4' %>
 
-        <div class="col-12">
-        </div>
+            <div class="row g-3 mb-4">
+                <%= f.label '出租人', class: 'form-label fw-bold fs-5' %>
 
-        <div class="col-12">
-        </div>
+                <div class="col-md-4">
+                    <%= f.label '姓名' %>
+                    <%= f.text_field :leaseholder, class: "form-control" %>
+                </div>
+                <div class="col-md-4">
+                    <%= f.label '統一編號(身份證明文件編號)' %>
+                    <%= f.text_field :leaseholder_id_number, class: "form-control" %>
+                </div>
+                <div class="col-md-4">
+                    <%= f.label '戶籍地址(營業登記地址)' %>
+                    <%= f.text_field :leaseholder_address, class: "form-control" %>
+                </div>
+                <div class="col-md-4">
+                    <%= f.label '通訊地址' %>
+                    <%= f.text_field :leaseholder_comm_address, class: "form-control" %>
+                </div>
+                <div class="col-md-4">
+                    <%= f.label '聯絡電話' %>
+                    <%= f.text_field :leaseholder_phone, class: "form-control" %>
+                </div>
+            </div>
 
-        <div class="col-12">
-        </div>
+            <div class="row g-3 mb-4">
+                <%= f.label '承租人', class: 'form-label fw-bold fs-5' %>
 
-        <div class="col-12">
+                <div class="col-md-4">
+                    <%= f.label '姓名' %>
+                    <%= f.text_field :leasee, class: "form-control" %>
+                </div>
+                <div class="col-md-4">
+                    <%= f.label '統一編號(身份證明文件編號)' %>
+                    <%= f.text_field :leasee_id_number, class: "form-control" %>
+                </div>
+                <div class="col-md-4">
+                    <%= f.label '戶籍地址(營業登記地址)' %>
+                    <%= f.text_field :leasee_address, class: "form-control" %>
+                </div>
+                <div class="col-md-4">
+                    <%= f.label '通訊地址' %>
+                    <%= f.text_field :leasee_comm_address, class: "form-control" %>
+                </div>
+                <div class="col-md-4">
+                    <%= f.label '聯絡電話' %>
+                    <%= f.text_field :leasee_phone, class: "form-control" %>
+                </div>
+            </div>
         </div>
 
         <%= f.submit '產生圖表', class: 'btn btn-primary mb-5' %>
