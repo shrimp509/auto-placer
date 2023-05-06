@@ -1,2 +1,8 @@
-<h1>Lease#start</h1>
-<p>Find me in app/views/lease/start.html.erb</p>
+<h1><u><%= params[:building_number] %></u>的圖表產生完成</h1>
+<p>共產生三張圖，並且壓縮為一個檔案：</p>
+<ol class="my-list">
+    <li>租賃標的、租賃期間、租金</li>
+    <li>租金支付方式</li>
+    <li>契約書簽名</li>
+</ol>
+<%= link_to '下載壓縮檔', lease_download_path(name: @name), class: 'btn btn-primary mb-5' %>

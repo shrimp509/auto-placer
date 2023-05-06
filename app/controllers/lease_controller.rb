@@ -3,9 +3,9 @@ class LeaseController < ApplicationController
   end
 
   def start
-    lease_page_1 = "#{Rails.root}/tmp/#{params[:leaseholder]}-租約-第一頁.png"
-    lease_page_2 = "#{Rails.root}/tmp/#{params[:leaseholder]}-租約-第二頁.png"
-    lease_page_3 = "#{Rails.root}/tmp/#{params[:leaseholder]}-租約-第三頁.png"
+    lease_page_1 = "#{Rails.root}/tmp/#{params[:building_number]}-租約-第一頁.png"
+    lease_page_2 = "#{Rails.root}/tmp/#{params[:building_number]}-租約-第二頁.png"
+    lease_page_3 = "#{Rails.root}/tmp/#{params[:building_number]}-租約-第三頁.png"
 
     `ffmpeg -y \
       -i #{Rails.root}/app/assets/images/lease-1.jpg \
@@ -64,7 +64,10 @@ class LeaseController < ApplicationController
 
     @name = zip_name
   ensure
-    # [lease_page_1, lease_page_2, lease_page_3].each { |file| File.delete(file) }
+    [lease_page_1, lease_page_2, lease_page_3].each do |file|
+      File.delete(file)
+      Rails.logger.info("#{file} deleted at #{Time.current.in_time_zone('Asia/Taipei')}")
+    end
   end
 
   def download
@@ -73,7 +76,10 @@ class LeaseController < ApplicationController
     send_file(file) if File.exist?(file)
   ensure
     other_zips = Dir.glob("tmp/*.zip") - [file]
-    other_zips.each { |file| File.delete(file) }
+    other_zips.each do |file|
+      File.delete(file)
+      Rails.logger.info("#{file} deleted at #{Time.current.in_time_zone('Asia/Taipei')}")
+    end
   end
 
   private
