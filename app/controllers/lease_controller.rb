@@ -3,9 +3,10 @@ class LeaseController < ApplicationController
   end
 
   def start
-    lease_page_1 = "#{Rails.root}/tmp/#{params[:building_number]}-租約-第一頁.png"
-    lease_page_2 = "#{Rails.root}/tmp/#{params[:building_number]}-租約-第二頁.png"
-    lease_page_3 = "#{Rails.root}/tmp/#{params[:building_number]}-租約-第三頁.png"
+    filename = params[:building_number]&.strip
+    lease_page_1 = "#{Rails.root}/tmp/#{filename}-租約-第一頁.png"
+    lease_page_2 = "#{Rails.root}/tmp/#{filename}-租約-第二頁.png"
+    lease_page_3 = "#{Rails.root}/tmp/#{filename}-租約-第三頁.png"
 
     `ffmpeg -y \
       -i #{Rails.root}/app/assets/images/lease-1.jpg \
@@ -23,9 +24,9 @@ class LeaseController < ApplicationController
           #{draw_text(params[:parking_car_number], 450, 1310, size: 30)},\
           #{draw_text('V', x_option_parking_type, 1270, size: 30)},\
           #{draw_text(params[:parking_bike_floor], 805, 1345, size: 30)},\
-          #{draw_text(params[:parking_bike_number], 1020, 1345, size: 30)},\
+          #{draw_text(params[:parking_bike_number], 1000, 1345, size: 30)},\
           #{draw_text('V', x_option_parking_period, 1465, size: 30)},\
-          #{draw_text("`#{params[:other]}`", 807, 1460, size: 30)},\
+          #{draw_text(params[:other], 807, 1460, size: 30)},\
           #{draw_text(params[:lease_period_from_year], 615, 1625, size: 30)},\
           #{draw_text(params[:lease_period_from_month], 780, 1625, size: 30)},\
           #{draw_text(params[:lease_period_from_day], 930, 1625, size: 30)},\
@@ -54,8 +55,10 @@ class LeaseController < ApplicationController
             #{draw_text(params[:leasee_comm_address], 385, 675, size: 30)},\
             #{draw_text(params[:leasee_phone], 385, 725, size: 30)}" #{lease_page_3}`
 
+    check_files_existence([lease_page_1, lease_page_2, lease_page_3])
+
     require 'zip'
-    zip_name = "#{params[:building_number]}.zip"
+    zip_name = "#{filename}.zip"
     Zip::File.open("tmp/#{zip_name}", Zip::File::CREATE) do |zip|
       zip.add(File.basename(lease_page_1), lease_page_1)
       zip.add(File.basename(lease_page_2), lease_page_2)
@@ -89,7 +92,7 @@ class LeaseController < ApplicationController
   end
 
   def draw_text(text, x, y, color: 'black', size: 22)
-    "drawtext=#{font_file}:text='#{text}':fontcolor=#{color}:fontsize=#{size}:x=#{x}:y=#{y}"
+    "drawtext=#{font_file}:text='#{text&.strip}':fontcolor=#{color}:fontsize=#{size}:x=#{x}:y=#{y}"
   end
 
   def x_option_parking_period
@@ -115,6 +118,26 @@ class LeaseController < ApplicationController
       930
     else
       700
+    end
+  end
+
+  def check_files_existence(files, max_retries = 5, retry_interval = 1)
+    retries = 0
+  
+    loop do
+      missing_files = files.select { |file| !File.exist?(file) }
+  
+      if missing_files.empty?
+        # 所有檔案都存在
+        break
+      elsif retries < max_retries
+        # 還有檔案不存在，進行等待並重試
+        retries += 1
+        sleep retry_interval
+      else
+        # 超過最大重試次數，拋出錯誤
+        raise "無法找到以下檔案: #{missing_files.join(', ')}"
+      end
     end
   end
 end

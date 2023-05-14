@@ -3,22 +3,31 @@
     <p class="lead text-center">將協助冠甫，完成租約需要填資料的雜事<br>只需要填一次資料，就產出所需圖片</p>
 </div>
 
-<%= form_with url: 'start', method: :get, class: 'row g-3' do |f| %>
+<%= form_with url: 'start', method: :get, class: 'row g-3 needs-validation', novalidate: true, data: { controller: 'form' }, html: { id: 'my-form' } do |f| %>
     <div class="row g-3">
         <div class="row g-3">
             <%= f.label '審閱時間', class: 'form-label fw-bold fs-4' %>
 
-            <div class="col-md-4">
+            <div class="col-md-4 has-validation">
                 <%= f.label '年(民國)' %>
-                <%= f.text_field :year, class: "form-control" %>
+                <%= f.text_field :year, class: "form-control", pattern: "\\d{0,3}" %>
+                <div class="invalid-feedback">
+                    只允許數字且最多3位數
+                </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 has-validation">
                 <%= f.label '月' %>
-                <%= f.text_field :month, class: "form-control" %>
+                <%= f.text_field :month, class: "form-control", pattern: "\\d{0,2}" %>
+                <div class="invalid-feedback">
+                    只允許數字且最多2位數
+                </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 has-validation">
                 <%= f.label '日' %>
-                <%= f.text_field :date, class: "form-control" %>
+                <%= f.text_field :date, class: "form-control", pattern: "\\d{0,2}" %>
+                <div class="invalid-feedback">
+                    只允許數字且最多2位數
+                </div>
             </div>
         </div>
 
@@ -26,33 +35,40 @@
             <%= f.label '租賃住宅標示', class: 'form-label fw-bold fs-4' %>
 
             <div class="row g-3">
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '建號' %>
-                    <%= f.text_field :building_number, class: "form-control" %>
+                    <%= f.text_field :building_number, class: "form-control", required: true, pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029\\d\\(\\)\\.-]+" %>
+                    <div class="invalid-feedback">
+                        必填，只允許中文、數字、半形括號、-符號、.符號
+                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '門牌' %>
-                    <%= f.text_field :house_number, class: "form-control" %>
+                    <%= f.text_field :house_number, class: "form-control", pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029\\d\\(\\)\\.-]+" %>
+                    <div class="invalid-feedback">
+                        只允許中文、數字、半形括號、-符號、.符號
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <%= f.label '汽車位' %>
-                    <%= f.text_field :car_capacity, class: "form-control" %>
-                </div>
-                <div class="col-md-4">
-                    <%= f.label '機車位' %>
-                    <%= f.text_field :bike_capacity, class: "form-control" %>
-                </div>
-                <div class="col-md-4">
+                <div class="col-md-4" has-validation>
                     <%= f.label '主建物' %>
-                    <%= f.text_field :main_building, class: "form-control" %>
+                    <%= f.text_field :main_building, class: "form-control", pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029\\d\\(\\)\\.-]+" %>
+                    <div class="invalid-feedback">
+                        只允許中文、數字、半形括號、-符號、.符號
+                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" has-validation>
                     <%= f.label '附屬建物' %>
-                    <%= f.text_field :affiliated_building, class: "form-control" %>
+                    <%= f.text_field :affiliated_building, class: "form-control", pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029\\d\\(\\)\\.-]+" %>
+                    <div class="invalid-feedback">
+                        只允許中文、數字、半形括號、-符號、.符號
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <%= f.label '共有部分建號' %>
-                    <%= f.text_field :shared_building_number, class: "form-control" %>
+                    <%= f.text_field :shared_building_number, class: "form-control", pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029\\d\\(\\)\\.-]+" %>
+                    <div class="invalid-feedback">
+                        只允許中文、數字、半形括號、-符號、.符號
+                    </div>
                 </div>
             </div>
         </div>
@@ -63,17 +79,23 @@
             <div class="row g-3 mb-4">
                 <%= f.label '汽車車位', class: 'form-label fw-bold fs-5' %>
 
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '第幾層' %>
-                    <%= f.text_field :parking_car_floor, class: "form-control" %>
+                    <%= f.text_field :parking_car_floor, class: "form-control", pattern: "\\d+" %>
+                    <div class="invalid-feedback">
+                        只允許數字
+                    </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '車位編號' %>
-                    <%= f.text_field :parking_car_number, class: "form-control" %>
+                    <%= f.text_field :parking_car_number, class: "form-control", pattern: "[\\d-]+" %>
+                    <div class="invalid-feedback">
+                        只允許數字 和 -符號
+                    </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <div class="form-check">
                         <%= f.radio_button :option_parking_type, '平面車位', id: 'option_parking_flat', class: 'form-check-input' %>
                         <%= f.label 'option_flat', '平面車位', class: 'form-check-label' %>
@@ -88,21 +110,27 @@
             <div class="row g-3 mb-4">
                 <%= f.label '機車車位', class: 'form-label fw-bold fs-5' %>
 
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '第幾層' %>
-                    <%= f.text_field :parking_bike_floor, class: "form-control" %>
+                    <%= f.text_field :parking_bike_floor, class: "form-control", pattern: "\\d+" %>
+                    <div class="invalid-feedback">
+                        只允許數字
+                    </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '車位編號' %>
-                    <%= f.text_field :parking_bike_number, class: "form-control" %>
+                    <%= f.text_field :parking_bike_number, class: "form-control", pattern: "[\\d-]+" %>
+                    <div class="invalid-feedback">
+                        只允許數字 和 -符號
+                    </div>
                 </div>
             </div>
 
             <div class="row g-3 mb-4">
                 <%= f.label '使用時間', class: 'form-label fw-bold fs-5' %>
 
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
 
                     <div class="form-check">
                         <%= f.radio_button :option_parking_period, '全日', id: 'option_parking_use_period_full', class: 'form-check-input' %>
@@ -122,7 +150,10 @@
                     <div class="form-check">
                         <%= f.radio_button :option_parking_period, '其他', id: 'option_parking_use_period_other', class: 'form-check-input' %>
                         <%= f.label 'option_others', '其他', class: 'form-check-label' %>
-                        <%= f.text_field :other, class: "form-control" %>
+                        <%= f.text_field :other, class: "form-control", pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029\\d\\(\\)-]+" %>
+                        <div class="invalid-feedback">
+                            只允許中文、數字、半形括號、-符號
+                        </div>
                     </div>
                 </div>
             </div>
@@ -133,34 +164,52 @@
 
             <div class="row g-3 mb-4">
                 <%= f.label '起始時間', class: 'form-label fw-bold fs-5' %>
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '年(民國)' %>
-                    <%= f.text_field :lease_period_from_year, class: "form-control" %>
+                    <%= f.text_field :lease_period_from_year, class: "form-control", pattern: "\\d{0,3}" %>
+                    <div class="invalid-feedback">
+                        只允許數字且最多3位數
+                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '月' %>
-                    <%= f.text_field :lease_period_from_month, class: "form-control" %>
+                    <%= f.text_field :lease_period_from_month, class: "form-control", pattern: "\\d{0,2}" %>
+                    <div class="invalid-feedback">
+                        只允許數字且最多2位數
+                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '日' %>
-                    <%= f.text_field :lease_period_from_day, class: "form-control" %>
+                    <%= f.text_field :lease_period_from_day, class: "form-control", pattern: "\\d{0,2}" %>
+                    <div class="invalid-feedback">
+                        只允許數字且最多2位數
+                    </div>
                 </div>
             </div>
 
             <div class="row g-3 mb-4">
                 <%= f.label '截止時間', class: 'form-label fw-bold fs-5' %>
 
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '年(民國)' %>
-                    <%= f.text_field :lease_period_to_year, class: "form-control" %>
+                    <%= f.text_field :lease_period_to_year, class: "form-control", pattern: "\\d{0,3}" %>
+                    <div class="invalid-feedback">
+                        只允許數字且最多3位數
+                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '月' %>
-                    <%= f.text_field :lease_period_to_month, class: "form-control" %>
+                    <%= f.text_field :lease_period_to_month, class: "form-control", pattern: "\\d{0,2}" %>
+                    <div class="invalid-feedback">
+                        只允許數字且最多2位數
+                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '日' %>
-                    <%= f.text_field :lease_period_to_day, class: "form-control" %>
+                    <%= f.text_field :lease_period_to_day, class: "form-control", pattern: "\\d{0,2}" %>
+                    <div class="invalid-feedback">
+                        只允許數字且最多2位數
+                    </div>
                 </div>
             </div>
         </div>
@@ -168,38 +217,59 @@
         <div class="col-12">
             <%= f.label '租金資訊', class: 'form-label fw-bold fs-4' %>
 
-            <div class="col-md-4">
+            <div class="col-md-4 has-validation">
                 <%= f.label '繳納租金' %>
                 <div class="input-group mb-3">
-                    <%= f.text_field :lease_price, class: "form-control" %>
+                    <%= f.text_field :lease_price, class: "form-control", pattern: "\\d+" %>
                     <span class="input-group-text" id="basic-addon2">元</span>
+                    <div class="invalid-feedback">
+                        只允許數字
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 has-validation">
                 <div class="form-check">
                     <%= f.radio_button :option_lease_unit, '於每月', id: 'option_lease_unit_month', class: 'form-check-input', checked: true %>
                     <%= f.label 'option_per_month', '於每月', class: 'form-check-label' %>
 
                     <div class="input-group mb-3">
-                        <%= f.text_field :option_lease_unit_month_day, class: "form-control" %>
+                        <%= f.text_field :option_lease_unit_month_day, class: "form-control", pattern: "\\d+" %>
                         <span class="input-group-text" id="basic-addon2">日前支付</span>
+                        <div class="invalid-feedback">
+                            只允許數字
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 has-validation">
                 <div class="form-check">
                     <%= f.radio_button :option_pay_method, '轉帳繳納', id: 'option_pay_method', class: 'form-check-input', checked: true %>
                     <%= f.label 'option_transfer', '轉帳繳納', class: 'form-check-label' %>
 
                     <br>
-                    <%= f.label 'option_bank_name', '金融機構' %>
-                    <%= f.text_field :bank_name, class: "form-control" %>
+                    <div class="has-validation">
+                        <%= f.label 'option_bank_name', '金融機構' %>
+                        <%= f.text_field :bank_name, class: "form-control", pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029\\(\\)\\d]+" %>
+                        <div class="invalid-feedback">
+                            只允許中文、數字、半形括號
+                        </div>
+                    </div>
 
-                    <%= f.label 'option_bank_user_name', '戶名' %>
-                    <%= f.text_field :bank_user_name, class: "form-control" %>
+                    <div class="has-validation">
+                        <%= f.label 'option_bank_user_name', '戶名' %>
+                        <%= f.text_field :bank_user_name, class: "form-control", pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029]+" %>
+                        <div class="invalid-feedback">
+                            只允許中文字
+                        </div>
+                    </div>
 
-                    <%= f.label 'option_bank_user_account', '帳號' %>
-                    <%= f.text_field :bank_user_account, class: "form-control" %>
+                    <div class="has-validation">
+                        <%= f.label 'option_bank_user_account', '帳號' %>
+                        <%= f.text_field :bank_user_account, class: "form-control", pattern: "[\\d-]+" %>
+                        <div class="invalid-feedback">
+                            只允許數字跟-符號
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -210,50 +280,80 @@
             <div class="row g-3 mb-4">
                 <%= f.label '出租人', class: 'form-label fw-bold fs-5' %>
 
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '姓名' %>
-                    <%= f.text_field :leaseholder, class: "form-control" %>
+                    <%= f.text_field :leaseholder, class: "form-control", required: true, pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029]+" %>
+                    <div class="invalid-feedback">
+                        必填，只允許中文字
+                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '統一編號(身份證明文件編號)' %>
-                    <%= f.text_field :leaseholder_id_number, class: "form-control" %>
+                    <%= f.text_field :leaseholder_id_number, class: "form-control", pattern: "^[A-Z]{1}\\d+" %>
+                    <div class="invalid-feedback">
+                        e.g. D122456789
+                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '戶籍地址(營業登記地址)' %>
-                    <%= f.text_field :leaseholder_address, class: "form-control" %>
+                    <%= f.text_field :leaseholder_address, class: "form-control", pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029\\(\\)\\d-]+" %>
+                    <div class="invalid-feedback">
+                        只允許中文、數字、半形括號、-符號
+                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '通訊地址' %>
-                    <%= f.text_field :leaseholder_comm_address, class: "form-control" %>
+                    <%= f.text_field :leaseholder_comm_address, class: "form-control", pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029\\(\\)\\d-]+" %>
+                    <div class="invalid-feedback">
+                        只允許中文、數字、半形括號、-符號
+                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '聯絡電話' %>
-                    <%= f.text_field :leaseholder_phone, class: "form-control" %>
+                    <%= f.text_field :leaseholder_phone, class: "form-control", pattern: "[\\d\\(\\)-]+" %>
+                    <div class="invalid-feedback">
+                        只允許數字、半形括號、-符號
+                    </div>
                 </div>
             </div>
 
             <div class="row g-3 mb-4">
                 <%= f.label '承租人', class: 'form-label fw-bold fs-5' %>
 
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '姓名' %>
-                    <%= f.text_field :leasee, class: "form-control" %>
+                    <%= f.text_field :leasee, class: "form-control", required: true, pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029]+" %>
+                    <div class="invalid-feedback">
+                        必填，只允許中文字
+                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '統一編號(身份證明文件編號)' %>
-                    <%= f.text_field :leasee_id_number, class: "form-control" %>
+                    <%= f.text_field :leasee_id_number, class: "form-control", pattern: "^[A-Z]{1}\\d+" %>
+                    <div class="invalid-feedback">
+                        e.g. D122456789
+                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '戶籍地址(營業登記地址)' %>
-                    <%= f.text_field :leasee_address, class: "form-control" %>
+                    <%= f.text_field :leasee_address, class: "form-control", pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029\\(\\)\\d-]+" %>
+                    <div class="invalid-feedback">
+                        只允許中文、數字、半形括號、-符號
+                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '通訊地址' %>
-                    <%= f.text_field :leasee_comm_address, class: "form-control" %>
+                    <%= f.text_field :leasee_comm_address, class: "form-control", pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029\\(\\)\\d-]+" %>
+                    <div class="invalid-feedback">
+                        只允許中文、數字、半形括號、-符號
+                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 has-validation">
                     <%= f.label '聯絡電話' %>
-                    <%= f.text_field :leasee_phone, class: "form-control" %>
+                    <%= f.text_field :leasee_phone, class: "form-control", pattern: "[\\d\\(\\)-]+" %>
+                    <div class="invalid-feedback">
+                        只允許數字、半形括號、-符號
+                    </div>
                 </div>
             </div>
         </div>
