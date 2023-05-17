@@ -282,9 +282,9 @@
 
                 <div class="col-md-4 has-validation">
                     <%= f.label '姓名' %>
-                    <%= f.text_field :leaseholder, class: "form-control", required: true, pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029]+" %>
+                    <%= f.text_field :leaseholder, class: "form-control", required: true, pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029\\s]+" %>
                     <div class="invalid-feedback">
-                        必填，只允許中文字
+                        必填，只允許中文字、空白
                     </div>
                 </div>
                 <div class="col-md-4 has-validation">
@@ -322,9 +322,9 @@
 
                 <div class="col-md-4 has-validation">
                     <%= f.label '姓名' %>
-                    <%= f.text_field :leasee, class: "form-control", required: true, pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029]+" %>
+                    <%= f.text_field :leasee, class: "form-control", required: true, pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029\\s]+" %>
                     <div class="invalid-feedback">
-                        必填，只允許中文字
+                        必填，只允許中文字、空白
                     </div>
                 </div>
                 <div class="col-md-4 has-validation">
