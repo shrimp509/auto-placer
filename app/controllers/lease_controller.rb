@@ -13,13 +13,13 @@ class LeaseController < ApplicationController
       -vf "#{draw_text(params[:year], 830, 190, size: 30)},\
           #{draw_text(params[:month], 1000, 190, size: 30)},\
           #{draw_text(params[:date], 1150, 190, size: 30)},\
-          #{draw_text(params[:building_number], 425, 585, size: 30)},\
-          #{draw_text(params[:house_number], 425, 645, size: 30)},\
+          #{draw_text(params[:building_number], 425, 640, size: 30)},\
+          #{draw_text(params[:house_number], 425, 585, size: 30)},\
           #{draw_text(params[:car_capacity], 455, 705, size: 30)},\
           #{draw_text(params[:bike_capacity], 455, 765, size: 30)},\
-          #{draw_text(params[:main_building], 455, 825, size: 30)},\
-          #{draw_text(params[:affiliated_building], 495, 895, size: 30)},\
-          #{draw_text(params[:shared_building_number], 560, 960, size: 30)},\
+          #{draw_text(params[:main_building], 520, 825, size: 30)},\
+          #{draw_text(params[:affiliated_building], 555, 895, size: 30)},\
+          #{draw_text(params[:shared_building_number], 565, 960, size: 30)},\
           #{draw_text(params[:parking_car_floor], 605, 1270, size: 30)},\
           #{draw_text(params[:parking_car_number], 450, 1310, size: 30)},\
           #{draw_text('V', x_option_parking_type, 1270, size: 30)},\

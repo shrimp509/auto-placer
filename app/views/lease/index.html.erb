@@ -80,10 +80,10 @@
                 <%= f.label '汽車車位', class: 'form-label fw-bold fs-5' %>
 
                 <div class="col-md-4 has-validation">
-                    <%= f.label '第幾層' %>
-                    <%= f.text_field :parking_car_floor, class: "form-control", pattern: "\\d+" %>
+                    <%= f.label '第幾層(若無車位則免填)' %>
+                    <%= f.text_field :parking_car_floor, class: "form-control", pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029\\da-zA-Z]+" %>
                     <div class="invalid-feedback">
-                        只允許數字
+                        只允許中文、英文、數字
                     </div>
                 </div>
 
@@ -111,10 +111,10 @@
                 <%= f.label '機車車位', class: 'form-label fw-bold fs-5' %>
 
                 <div class="col-md-4 has-validation">
-                    <%= f.label '第幾層' %>
-                    <%= f.text_field :parking_bike_floor, class: "form-control", pattern: "\\d+" %>
+                    <%= f.label '第幾層(若無車位則免填)' %>
+                    <%= f.text_field :parking_bike_floor, class: "form-control", pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029\\da-zA-Z]+" %>
                     <div class="invalid-feedback">
-                        只允許數字
+                        只允許中文、英文、數字
                     </div>
                 </div>
 
