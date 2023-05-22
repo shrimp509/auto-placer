@@ -44,9 +44,9 @@
                 </div>
                 <div class="col-md-4 has-validation">
                     <%= f.label '門牌' %>
-                    <%= f.text_field :house_number, class: "form-control", pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029\\d\\(\\)\\.-]+" %>
+                    <%= f.text_field :house_number, class: "form-control", required: true, pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029\\d\\(\\)\\.-]+" %>
                     <div class="invalid-feedback">
-                        只允許中文、數字、半形括號、-符號、.符號
+                        必填，只允許中文、數字、半形括號、-符號、.符號
                     </div>
                 </div>
                 <div class="col-md-4" has-validation>
@@ -68,6 +68,38 @@
                     <%= f.text_field :shared_building_number, class: "form-control", pattern: "[\\u4E00-\\u9FFF\\u3400-\\u4DBF\\u3040-\\u30FF\\uFF66-\\uFF9F\\uF900-\\uFAFF\\u002D\\u0028\\u0029\\d\\(\\)\\.-]+" %>
                     <div class="invalid-feedback">
                         只允許中文、數字、半形括號、-符號、.符號
+                    </div>
+                </div>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4 has-validation">
+                    <%= f.label '汽車位' %>
+                    <div class="form-check">
+                        <%= f.radio_button :option_car_position, '有', id: 'option_parking_flat', class: 'form-check-input' %>
+                        <%= f.label 'option_car_position_yes', '有', class: 'form-check-label' %>
+                    </div>
+                    <div class="form-check">
+                        <%= f.radio_button :option_car_position, '無', id: 'option_parking_machine', class: 'form-check-input' %>
+                        <%= f.label 'option_car_position_no', '無', class: 'form-check-label' %>
+                    </div>
+                    <div class="form-check">
+                        <%= f.radio_button :option_car_position, '洽管委會', id: 'option_parking_machine', class: 'form-check-input' %>
+                        <%= f.label 'option_car_position_ask_more', '洽管委會', class: 'form-check-label' %>
+                    </div>
+                </div>
+                <div class="col-md-4 has-validation">
+                    <%= f.label '機車位' %>
+                    <div class="form-check">
+                        <%= f.radio_button :option_bike_position, '有', id: 'option_parking_flat', class: 'form-check-input' %>
+                        <%= f.label 'option_bike_position_yes', '有', class: 'form-check-label' %>
+                    </div>
+                    <div class="form-check">
+                        <%= f.radio_button :option_bike_position, '無', id: 'option_parking_machine', class: 'form-check-input' %>
+                        <%= f.label 'option_bike_position_no', '無', class: 'form-check-label' %>
+                    </div>
+                    <div class="form-check">
+                        <%= f.radio_button :option_bike_position, '洽管委會', id: 'option_parking_machine', class: 'form-check-input' %>
+                        <%= f.label 'option_bike_position_ask_more', '洽管委會', class: 'form-check-label' %>
                     </div>
                 </div>
             </div>
