@@ -72,7 +72,7 @@ class LeaseController < ApplicationController
       zip.add(File.basename(lease_page_7), lease_page_7)
       zip.add("#{filename}-租約-第8頁.jpg", "#{Rails.root}/app/assets/images/lease-8.jpg")
       zip.add("#{filename}-租約-第9頁.jpg", "#{Rails.root}/app/assets/images/lease-9.jpg")
-      zip.add("#{filename}-租約-第10頁.jpg", "#{Rails.root}/app/assets/images/lease-10.jpg")
+      # zip.add("#{filename}-租約-第10頁.jpg", "#{Rails.root}/app/assets/images/lease-10.jpg")
     end
 
     @name = zip_name
