@@ -26,7 +26,7 @@ class HomeController < ApplicationController
 
     require 'zip'
     zip_name = "#{params[:address]}.zip"
-    Zip::File.open("tmp/#{zip_name}", Zip::File::CREATE) do |zip|
+    Zip::File.open("tmp/#{zip_name}", create: true) do |zip|
       zip.add(File.basename(water_affidavit), water_affidavit)
       zip.add(File.basename(electric), electric)
     end

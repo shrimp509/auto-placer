@@ -61,7 +61,7 @@ class LeaseController < ApplicationController
 
     require 'zip'
     zip_name = "#{filename}.zip"
-    Zip::File.open("tmp/#{zip_name}", Zip::File::CREATE) do |zip|
+    Zip::File.open("tmp/#{zip_name}", create: true) do |zip|
       zip.add("#{filename}-租約-第0頁.jpg", "#{Rails.root}/app/assets/images/lease-0.jpg")
       zip.add(File.basename(lease_page_1), lease_page_1)
       zip.add(File.basename(lease_page_2), lease_page_2)
