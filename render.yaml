@@ -1,22 +1,23 @@
+databases:
+  - name: auto-placer
+    databaseName: auto_placer
+    user: auto_placer
+    plan: free
+
 services:
   - type: web
     name: auto-placer
-    runtime: docker
+    runtime: ruby
     plan: free
-    dockerfilePath: ./Dockerfile
+    buildCommand: './bin/render-build.sh'
+    startCommand: 'bundle exec rails server'
     region: singapore
     envVars:
-      - key: RAILS_ENV
-        value: production
-      - key: RAILS_SERVE_STATIC_FILES
-        value: true
-      - key: RAILS_LOG_TO_STDOUT
-        value: true
-      - key: SECRET_KEY_BASE
-        generateValue: true
-      - key: PORT
-        value: 8080
-    disk:
-      name: auto-placer-db
-      mountPath: /app/db
-      sizeGB: 1
+      - key: DATABASE_URL
+        fromDatabase:
+          name: auto-placer
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: WEB_CONCURRENCY
+        value: 2
