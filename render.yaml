@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: auto-placer
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    region: singapore
+    envVars:
+      - key: RAILS_ENV
+        value: production
+      - key: RAILS_SERVE_STATIC_FILES
+        value: true
+      - key: RAILS_LOG_TO_STDOUT
+        value: true
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: PORT
+        value: 8080
+    disk:
+      name: auto-placer-db
+      mountPath: /app/db
+      sizeGB: 1

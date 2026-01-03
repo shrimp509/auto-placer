@@ -105,12 +105,12 @@ ENV SECRET_KEY_BASE 1
 # ENV AWS_ACCESS_KEY_ID=1
 # ENV AWS_SECRET_ACCESS_KEY=1
 
-# Run build task defined in lib/tasks/fly.rake
-ARG BUILD_COMMAND="bin/rails fly:build"
-RUN ${BUILD_COMMAND}
+# Run asset precompilation
+RUN bin/rails assets:precompile
 
-# Default server start instructions.  Generally Overridden by fly.toml.
+# Default server start instructions
 ENV PORT 8080
-ARG SERVER_COMMAND="bin/rails fly:server"
-ENV SERVER_COMMAND ${SERVER_COMMAND}
-CMD ${SERVER_COMMAND}
+EXPOSE 8080
+
+# Run database migrations and start server
+CMD bin/rails db:migrate && bin/rails server -b 0.0.0.0 -p 8080
