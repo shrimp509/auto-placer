@@ -2,6 +2,10 @@
 # exit on error
 set -o errexit
 
+# Install ffmpeg
+echo "Installing ffmpeg..."
+apt-get update -qq && apt-get install -y ffmpeg
+
 bundle install
 bundle exec rails assets:precompile
 bundle exec rails assets:clean
